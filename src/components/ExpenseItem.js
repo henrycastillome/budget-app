@@ -1,14 +1,21 @@
 import React, { useContext } from 'react';
-import { TiDelete } from 'react-icons/ti';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AppContext } from '../context/AppContext';
+import { faCircleMinus, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
+
 
 const ExpenseItem = (props) => {
-	const { dispatch } = useContext(AppContext);
+	const { dispatch, newCurrency } = useContext(AppContext);
 
-	const handleDeleteExpense = () => {
+	const handleDeleteExpense = (name) => {
+		const decrease={
+			name: name,
+			cost:10,
+
+		}
 		dispatch({
 			type: 'DELETE_EXPENSE',
-			payload: props.id,
+			payload: decrease,
 		});
 	};
 
@@ -29,9 +36,9 @@ const ExpenseItem = (props) => {
 	return (
 		<tr>
 		<td>{props.name}</td>
-		<td>${props.cost}</td>
-		<td><button onClick={event=> increaseAllocation(props.name)}>+</button></td>
-		<td><TiDelete size='1.5em' onClick={handleDeleteExpense}></TiDelete></td>
+		<td>{newCurrency} {props.cost}</td>
+		<td><FontAwesomeIcon icon={faCirclePlus} color='#4fac5b' size='3x'cursor='pointer' onClick={event=> increaseAllocation(props.name)}/></td>
+		<td><FontAwesomeIcon icon={faCircleMinus} color='red' size='3x'cursor='pointer' onClick={event=>handleDeleteExpense(props.name)}/> </td>
 		</tr>
 	);
 };
