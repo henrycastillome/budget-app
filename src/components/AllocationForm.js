@@ -65,7 +65,6 @@ const AllocationForm = (props) => {
 
 					<CurrencyInput
 						required='required'
-						type='number'
 						id='cost'
 						style={{ size: 10, marginLeft: '2rem' }}
 						prefix={newCurrency}
